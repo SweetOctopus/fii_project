@@ -1,0 +1,181 @@
+<!DOCTYPE html">
+
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <!--cette href c'est la nomenclature de jinja pour aller chercher la style sheet dans le dossier static,
+    je crois ^^-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+    integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+  <!-- Make sure you put this AFTER Leaflet's CSS -->
+  <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
+    integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
+
+  <title>Fii project</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content">
+      <header>
+        <h1><span>The atlas of Arabic <i>fii</i></br>أطلس حرف الجر في عبر اللهجات العربية </span></h1>
+        <nav>
+          <ul>
+            <li><a href="{{url_for('index')}}">Geographic Distribution</a></li>
+            <li><a href="{{url_for('similarity')}}">Similarity matrixes</a></li>
+            <li><a href="{{url_for('recherche')}}">Search the database</a></li>
+            <li><a href="{{url_for('language_clustering')}}">Language relatedness</a></li>
+            <li><a href="{{url_for('a_propos')}}">About this project</a></li>
+            <li><a href="{{url_for('bibliography')}}">Bibliography</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <h2>Search database</h2>
+
+      <div class="recherche">
+      
+    
+          <div id="form-container">
+            <form id="recherche" action="/recherche" method="post">
+                <fieldset class="recherche_field" id="field_1">
+                  <legend>Choose one country or more:</legend>
+                  <input type="checkbox" id="DZ" name="pays[]" value="DZ" {% if checked[0][0]==true %}checked{% endif %}>
+                  <label for="DZ">Algeria</label>
+                  <br>
+                  <input type="checkbox" id="EG" name="pays[]" value="EG" {% if checked[0][1]==true %}checked{% endif %}>
+                  <label for="EG">Egypt</label>
+                  <br>
+                  <input type="checkbox" id="IQ" name="pays[]" value="IQ" {% if checked[0][2]==true %}checked{% endif %}>
+                  <label for="IQ">Iraq</label>
+                  <br>
+                  <input type="checkbox" id="JO" name="pays[]" value="JO" {% if checked[0][3]==true %}checked{% endif %}>
+                  <label for="JO">Jordan</label>
+                  <br>
+                  <input type="checkbox" id="LY" name="pays[]" value="LY" {% if checked[0][4]==true %}checked{% endif %}>
+                  <label for="LY">Libya</label>
+                  <br>
+                  <input type="checkbox" id="MT" name="pays[]" value="MT" {% if checked[0][5]==true %}checked{% endif %}>
+                  <label for="MT">Malta</label>
+                  <br>
+                  <input type="checkbox" id="MA" name="pays[]" value="MA" {% if checked[0][6]==true %}checked{% endif %}>
+                  <label for="MA">Morocco</label>
+                  <br>
+                  <input type="checkbox" id="SD" name="pays[]" value="SD" {% if checked[0][7]==true %}checked{% endif %}>
+                  <label for="SD">Sudan</label>
+                  <br>
+                  <input type="checkbox" id="SY" name="pays[]" value="SY" {% if checked[0][8]==true %}checked{% endif %}>
+                  <label for="SY">Syria</label>
+                  <br>
+                  <input type="checkbox" id="TN" name="pays[]" value="TN" {% if checked[0][9]==true %}checked{% endif %}>
+                  <label for="TN">Tunisia</label>
+                  <br>
+                  <input type="checkbox" id="YE" name="pays[]" value="YE" {% if checked[0][10]==true %}checked{% endif %}>
+                  <label for="YE">Yemen</label>
+                  <br>
+
+                </fieldset>
+              
+                <br>
+              
+                <fieldset class="recherche_field" id="field_2">
+                  <legend>Choose one feature or more:</legend>
+                  <input type="checkbox" id="locative_fii" name="fonctions[]" value="1_locative_fii" {% if checked[1][0]==true %}checked{%
+                    endif %}>
+                  <label for="locative_fii">Locative</label>
+                  <br>
+                  <input type="checkbox" id="temporal_fii" name="fonctions[]" value="2_temporal_fii" {% if checked[1][1]==true %}checked{%
+                    endif %}>
+                  <label for="temporal_fii">Temporal</label>
+                  <br>
+                  <input type="checkbox" id="existential_fii" name="fonctions[]" value="3_existential_fii" {% if checked[1][2]==true %}checked{%
+                    endif %}>
+                  <label for="existential_fii">Existential</label>
+                  <br>
+                  <input type="checkbox" id="possessive_fii" name="fonctions[]" value="4_possesive_fii" {% if checked[1][3]==true %}checked{%
+                    endif %}>
+                  <label for="possessive_fii">Possessive</label>
+                  <br>
+                  <input type="checkbox" id="modal_fii" name="fonctions[]" value="5_modal_fii" {% if checked[1][4]==true %}checked{%
+                    endif %}>
+                  <label for="modal_fii">Modal</label>
+                  <br>
+                  <input type="checkbox" id="6_partitive_fii" name="fonctions[]" value="6_partitive_fii" {% if checked[1][5]==true %}checked{%
+                    endif %}>
+                  <label for="partitive_fii">Partitive</label>
+                  <br>
+                  <input type="checkbox" id="genitive_fii" name="fonctions[]" value="7_genitive_fii" {% if checked[1][6]==true %}checked{%
+                    endif %}>
+                  <label for="genitive_fii">Genitive</label>
+                  <br>
+                  <input type="checkbox" id="pluractional_intensive_fii" name="fonctions[]" value="8_pluractional_intensive_fii" {% if checked[1][7]==true %}checked{%
+                    endif %}>
+                  <label for="pluractional_intensive_fii">Pluractional intensive</label>
+                  <br>
+                  <input type="checkbox" id="progressive_fii" name="fonctions[]" value="9_progressive_fii" {% if checked[1][8]==true %}checked{%
+                    endif %}>
+                  <label for="progressive_fii">Progressive</label>
+                  <br>
+                  <input type="checkbox" id="serial_verb_constructions_fii" name="fonctions[]" value="10_serial_verb_constructions_fii" {% if checked[1][9]==true %}checked{%
+                    endif %}>
+                  <label for="serial_verb_constructions_fii">Serial verb constructions</label>
+                  <br>
+                  <input type="checkbox" id="causativized_statives" name="fonctions[]" value="11_causativized_statives_fii" {% if checked[1][10]==true %}checked{%
+                    endif %}>
+                  <label for="causativized_statives">Causativized statives</label>
+                </fieldset>
+              
+                <br>
+                <label for="text-input">Search by sentence number:</label>
+                <input type="text" id="text-input" name="text-input">
+                <br>
+                <button type="submit" value="Submit" class="btn appliquer">Apply</button>
+              </form>
+              
+              <div id="HTU_HTR">
+                <div id="expl"><h4 id="HTU">How to use</h4>To begin a search, you must select at least one variety. Data related to a specific phenomenon can be displayed by checking the corresponding box. Groups of selected sentences can be retrieved either by listing their numbers (e.g., *1, 3, 5, 19*) or by defining a range (e.g., *8-10*, which will display sentences 8, 9, and 10 from the varieties and phenomena selected via the checkboxes). Sentence numbers can be found in the "Number" column, and numbering restarts from 1 for each phenomenon.</div>
+                <div id="expl_htr"><h4 id="HTR">How to read the table</h4>       
+                  The organization of the table reflects the structure of the database and how it was compiled.</br>
+                  The database consists of a collection of parallel sentences across different varieties of Arabic. This means that the same sentence was translated by native speakers of a dialectal variety into their respective dialect.</br>
+                  The translated sentences all test the same uses of <i>fii</i> and examine the presence or absence of the same features or sub-phenomena.</br>
+                  The dialectal variety is indicated in the <strong>“language”</strong> column, while the type of <i>fii</i> (e.g., temporal <i>fii</i>) is specified in the <strong>“condition”</strong> column. The specific syntactic phenomenon being tested by the sentence is listed in the <strong>“feature”</strong> column.</br>
+                  Each sentence is assigned a unique identifier (under <strong>“number”</strong>) and is presented with the following elements:
+       
+                  <ul>
+                      <li>An <strong>“intended meaning”</strong>,</li>
+                      <li>An Arabic version of the sentence,</li>
+                      <li>Its <strong>phonological representation</strong> along with the corresponding glosses to enhance readability,</li>
+                      <li>The responses provided by each consultant (<strong>Speaker 1, 2, 3</strong>) to the question:</br>
+                        <i>"Does sentence X correspond to the intended meaning Y?" </i></br>
+                        The value “OK” indicates that there is a correspondence between the intended meaning and the sentence. The value “*” indicates that there is no correspondence because the sentence either conveys a different interpretation or is not grammatically correct in that variety.
+                      </li>
+                  </ul>
+                </div>
+              </div>        
+
+              
+          </div>
+          <div class="table_container">{{display|safe}}</div>
+        </div>
+      </div>
+      <div id="footer">
+        <div id="credits">
+        Web development by : Valentin Pradervand<br>
+        A study by: Margherita Pallottino, PhD
+        </div>
+        <div id="logos">
+          <img id="logo_UNIGE" src="{{ url_for('static', filename='logo_UNIGE.jpg') }}" alt="logo UNIGE" width="126px" height="50px">
+          <img id="logo_OFAI" src="{{ url_for('static', filename='logo_OFAI.svg') }}" alt="logo OFAI" width="206px" height="50px">
+          <img id="logo_FNS" src="{{ url_for('static', filename='logo_FNS.png') }}" alt="logo FNS" width="200px" height="50px">
+        </div>
+    </div>
+  </div>
+    
+  </div>
+</body>
+</html>
+

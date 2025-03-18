@@ -1,0 +1,76 @@
+<!DOCTYPE html">
+
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <!--cette href c'est la nomenclature de jinja pour aller chercher la style sheet dans le dossier static,
+    je crois ^^-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+
+  <title>Fii project</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content">
+      <header>
+        <h1><span>The atlas of Arabic <i>fii</i></br>أطلس حرف الجر في عبر اللهجات العربية </span></h1>
+        <nav>
+          <ul>
+            <li><a href="{{url_for('index')}}">Geographic Distribution</a></li>
+            <li><a href="{{url_for('similarity')}}">Similarity matrixes</a></li>
+            <li><a href="{{url_for('recherche')}}">Search the database</a></li>
+            <li><a href="{{url_for('language_clustering')}}">Language relatedness</a></li>
+            <li><a href="{{url_for('a_propos')}}">About this project</a></li>
+            <li><a href="{{url_for('bibliography')}}">Bibliography</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <h3>Bibliography</h3>
+      <div class="a_propos">
+        Brahim, Ahmed. 2007. « Le marquage “locatif” de l’objet et aspect progressif en arabe et en berbère tunisien ». <i>Cahier</i> du CRISCO 23, 94‑105. <br><br>
+
+        Cowell, Mark. 1964. <i>A reference grammar of Syrian Arabic (Based on the dialect of Damascus)</i>. Georgetown University Press. <br><br>
+        
+        Hallman, Peter. 2022. <i>The Flavors of Appl in Syrian Arabic</i>. Handout.  <br><br>
+        
+        Jarad, Nabil Ismail. 2015. "From locative to existential: The grammaticalization of “fī” in the spoken Arabic of Aleppo". <i><br><br>
+          Romano-Arabica XV, 235‑54.
+          
+          McNeil, Karen. 2017. "Fī (‘in’) as a marker of progressive aspect in Tunisian Arabic." Tunisian and Libyan Arabic dialects: Common trends–recent developments–diachronic aspects
+        </i>, 161-190 <br><br>
+        
+        Ouhalla, Jamal. 2015. Verbal plurality: Form II in Classical Arabic and plural AT in Moroccan Arabic, Manuscript. <br><br>
+        
+        Pallottino, Margherita. 2020. <i>Event building, selection and non-canonical case assignment: fi insertion in Tunisian Arabic.</i> PhD dissertation, University of Geneva.  <br><br>
+        
+        Ritt-Benmimoun, Veronika. 2017. "The preposition fi-as an object and aspect marker in a south Tunisian bedouin dialect." <i>Journal of Semitic Studies</i> 62.2, 319-355. <br><br>
+        
+        Salameh, Mohammad, Houda Bouamor, and Nizar Habash. 2018. "Fine-grained Arabic dialect identification." In <i>Proceedings of the 27th international conference on computational linguistics</i>, 1332-1344. <br><br>
+        
+        Woidich, Manfred. 2006. "fi Objects in Egyptian Arabic: the Case for Telic Verbs". <i>L’arabe dialectal: enquêtes, descriptions, interprétations</i> (Actes d’AiDA 6), 473-486. <br><br>
+      </div>
+ 
+    </div>
+    <div id="footer">
+      <div id="credits">
+        Web development by : Valentin Pradervand<br>
+        A study by: Margherita Pallottino, PhD
+    </div>
+    <div id="logos">
+        <img id="logo_UNIGE" src="{{ url_for('static', filename='logo_UNIGE.jpg') }}" alt="logo UNIGE" width="126px" height="50px">
+        <img id="logo_OFAI" src="{{ url_for('static', filename='logo_OFAI.svg') }}" alt="logo OFAI" width="206px" height="50px">
+        <img id="logo_FNS" src="{{ url_for('static', filename='logo_FNS.png') }}" alt="logo FNS" width="200px" height="50px">
+    </div>
+    </div>
+    </div>
+    
+  </div>
+</body>
+</html>

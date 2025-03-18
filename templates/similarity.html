@@ -1,0 +1,160 @@
+<!DOCTYPE html">
+
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <!--cette href c'est la nomenclature de jinja pour aller chercher la style sheet dans le dossier static,
+    je crois ^^-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="shortcut icon"  href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+ <title>Fii project</title>
+</head>
+
+<body>
+  <body>
+    <div id="wrapper">
+      <div id="content">
+        <header>
+          <h1><span>The atlas of Arabic <i>fii</i></br>أطلس حرف الجر في عبر اللهجات العربية </span></h1>
+            <nav>
+              <ul>
+                <li><a href="{{url_for('index')}}">Geographic Distribution</a></li>
+                <li><a href="{{url_for('similarity')}}">Similarity matrixes</a></li>
+                <li><a href="{{url_for('recherche')}}">Search the database</a></li>
+                <li><a href="{{url_for('language_clustering')}}">Language relatedness</a></li>
+                <li><a href="{{url_for('a_propos')}}">About this project</a></li>
+                <li><a href="{{url_for('bibliography')}}">Bibliography</a></li>
+              </ul>
+            </nav>
+          </header>
+
+
+        <h2>Cosine similarity</h2>
+
+
+        <div id="tab_sim" class="table_container">
+            <div>
+                <table>
+                    {{display|safe}}
+                </table>
+            </div>
+
+        </div>
+
+
+
+        <div id="menu-container2">
+          
+            <form  id="similarity" action="/similarity" method="post" >
+
+  
+                <fieldset>
+                  <legend>Choose one country or all:</legend>
+                    <input type="radio" id="ALL" name="fii_type" value="ALL" {% if fii_type=='ALL' %}checked{% endif %}>
+                    <label for="ALL">All</label><br>
+                    <input type="radio" id="locative" name="fii_type" value="locative" {% if fii_type=='locative' %}checked{% endif %}>
+                    <label for="locative">Locative</label><br>
+                    <input type="radio" id="temporal" name="fii_type" value="temporal" {% if fii_type=='temporal' %}checked{% endif %}>
+                    <label for="temporal">Temporal</label><br>
+                    <input type="radio" id="existential" name="fii_type" value="existential" {% if fii_type=='existential'%}checked{% endif %}>
+                    <label for="existential">Existential</label><br>
+                    <input type="radio" id="possesive" name="fii_type" value="possesive" {% if fii_type=='possesive' %}checked{% endif %}>
+                    <label for="possesive">Possesive</label><br>
+                    <input type="radio" id="modal" name="fii_type" value="modal" {% if fii_type=='modal' %}checked{% endif %}>
+                    <label for="modal">Modal</label><br>
+                    <input type="radio" id="partitive" name="fii_type" value="partitive" {% if fii_type=='partitive' %}checked{% endif %}>
+                    <label for="partitive">Partitive</label><br>
+                    <input type="radio" id="genitive" name="fii_type" value="genitive" {% if fii_type=='genitive' %}checked{% endif %}>
+                    <label for="genitive">Genitive</label><br>
+                    <input type="radio" id="pluractional_intensive" name="fii_type" value="pluractional_intensive" {% if fii_type=='pluractional_intensive' %}checked{% endif %}>
+                    <label for="pluractional_intensive">Pluractional intensive</label><br>
+                    <input type="radio" id="progressive" name="fii_type" value="progressive" {% if fii_type=='progressive' %}checked{% endif %}>
+                    <label for="progressive">Progressive</label><br>
+                    <input type="radio" id="serial_verb_constructions" name="fii_type" value="serial_verb_constructions" {% if fii_type=='serial_verb_constructions' %}checked{% endif %}>
+                    <label for="serial_verb_constructions">Serial verb constructions</label><br>
+                    <input type="radio" id="causativized_statives" name="fii_type" value="causativized_statives" {% if fii_type=='causativized_statives' %}checked{% endif %}>
+                    <label for="causativized_statives">Causativized statives</label><br>
+                    <input type="hidden" id="map_pos" name="map_pos" value="{{map_pos}}">
+                </fieldset>
+              
+                <br>
+                
+                <fieldset>
+              <!--Ici go tenter de mettre les différents pays ["DZ","EG","IQ","JO","LY","MT","MA","SD","SY","TN","YE"]-->
+                  <legend>Select a language</legend>
+                  <input type="radio" id="ALL" name="pays" value="ALL" {% if pays_form=='ALL' %}checked{% endif %}>
+                  <label for="ALL">All</label><br>
+                  <input type="radio" id="DZ" name="pays" value="DZ" {% if pays_form=='DZ' %}checked{% endif %}>
+                  <label for="DZ">Algeria</label><br>
+                  <input type="radio" id="EG" name="pays" value="EG" {% if pays_form=='EG' %}checked{% endif %}> 
+                  <label for="EG">Egypt</label><br>
+                  <input type="radio" id="IQ" name="pays" value="IQ" {% if pays_form=='IQ' %}checked{% endif %}>
+                  <label for="IQ">Iraq</label><br>
+                  <input type="radio" id="JO" name="pays" value="JO" {% if pays_form=='JO' %}checked{% endif %}>
+                  <label for="JO">Jordan</label><br>
+                  <input type="radio" id="LY" name="pays" value="LY" {% if pays_form=='LY' %}checked{% endif %}>
+                  <label for="LY">Libya</label><br>
+                  <input type="radio" id="MT" name="pays" value="MT" {% if pays_form=='MT' %}checked{% endif %}>
+                  <label for="MT">Malta</label><br>
+                  <input type="radio" id="MA" name="pays" value="MA" {% if pays_form=='MA' %}checked{% endif %}>
+                  <label for="MA">Morocco</label><br>
+                  <input type="radio" id="SD" name="pays" value="SD" {% if pays_form=='SD' %}checked{% endif %}>
+                  <label for="SD">Sudan</label><br>
+                  <input type="radio" id="SY" name="pays" value="SY" {% if pays_form=='SY' %}checked{% endif %}>
+                  <label for="SY">Syria</label><br>
+                  <input type="radio" id="TN" name="pays" value="TN" {% if pays_form=='TN' %}checked{% endif %}>
+                  <label for="TN">Tunisia</label><br>
+                  <input type="radio" id="YE" name="pays" value="YE" {% if pays_form=='YE' %}checked{% endif %}>
+                  <label for="YE">Yemen</label><br>
+                  <button type="submit" value="Submit" class="btn appliquer">Apply</button>
+                </fieldset>
+  
+
+            </form>
+  
+             
+        <div id="sim_HTU_HTR" class="scroll-box">
+          <div><h4 id="sim_HTU">How to Use the Tool</h4>
+            To conduct a similarity search, a variety and a feature (or “all” varieties and features) must be selected.<br><br>
+            Comparing judgments within <strong>a single variety</strong> regarding <strong>a specific phenomenon</strong> (e.g., Algerian, Temporal) reveals how stable the use of that phenomenon is within the linguistic community. In other words, it measures the degree of agreement among the consulted speakers concerning a specific use of <i>fii</i>.<br><br>
+            Comparing judgments within <strong>a single variety</strong> across <strong>all investigated phenomena</strong> (e.g., Algerian, All) provides insight into the consistency of the linguistic varieties spoken by the consultants. This, in turn, measures the agreement among speakers regarding their own spoken variety and reflects the overall homogeneity of the consultant sample. <br><br>
+            Comparing judgments across <strong>all investigated varieties</strong> for <strong>a specific phenomenon</strong> (e.g., All, Temporal) allows us to assess the varying degrees of reliability in the judgments expressed by speakers of each investigated variety concerning that phenomenon. This comparison highlights the varieties for which judgments on a given phenomenon tend to be more or less consistent. <br><br>
+            Finally, comparing judgments across <strong>all investigated varieties</strong> and <strong>all investigated phenomena</strong> (e.g., All, All) enables us to evaluate the overall consistency of linguistic judgments. In other words, it helps determine which varieties have speaker samples that most accurately reflect the overall linguistic situation. <br><br>
+            Importantly, any similarity or difference in judgments may be influenced by two confounding factors: <br><br>
+            <ul>
+              <li><strong>Sampling issues</strong> – The speakers may represent more or less similar dialectal varieties.</li>
+              <li><strong>Effective areas of variability within the language</strong> – Speakers may naturally alternate between different forms, even in relation to phenomena not captured by the study.</li>
+
+          </ul><br><br>
+            </div>
+
+          <div><h4 id="sim_HTR">How to read the table</h4>       
+            <p>This table presents the <strong>cosine similarity</strong> between vectors.</p>
+            <ul>
+              <li>The closer the value is to <strong>0</strong>, the less similar the vectors are, and vice versa.</li>
+              <li>A value of <strong>1</strong> means the vectors are identical.</li>
+              <li>A value of <strong>0</strong> means the vectors are completely opposite (e.g., if V1 contains a 0, V2 contains a 1, and vice versa).</li>
+              <li>The <span style="color:gold; font-weight: bold;">yellow "1"</span> indicates that both vectors are null, but since they are equal, their similarity is considered 1.</li>
+              <li>The <span style="color:red; font-weight: bold;">red "-"</span> means that one of the vectors is null, making it impossible to compute the cosine similarity.</li>
+            </ul>
+          </div>
+        </div> 
+      </div> 
+    </div>
+
+    <div id="footer">
+        <div id="credits">
+          Web development by : Valentin Pradervand<br>
+          A study by: Margherita Pallottino, PhD
+       </div>
+        <div id="logos">
+          <img id="logo_UNIGE" src="{{ url_for('static', filename='logo_UNIGE.jpg') }}" alt="logo UNIGE" width="126px" height="50px">
+          <img id="logo_OFAI" src="{{ url_for('static', filename='logo_OFAI.svg') }}" alt="logo OFAI" width="206px" height="50px">
+          <img id="logo_FNS" src="{{ url_for('static', filename='logo_FNS.png') }}" alt="logo FNS" width="200px" height="50px">
+        </div>
+      </div>
+  </body>
+  </html>

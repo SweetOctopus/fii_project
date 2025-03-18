@@ -1,0 +1,61 @@
+<!DOCTYPE html">
+
+<html lang="fr">
+
+<head>
+  <meta charset="utf-8" />
+  <!--cette href c'est la nomenclature de jinja pour aller chercher la style sheet dans le dossier static,
+    je crois ^^-->
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+  <link rel="shortcut icon"  href="{{ url_for('static', filename='favicon.ico') }}">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+  <title>Fii project</title>
+</head>
+
+<body>
+  <body>
+    <div id="wrapper">
+      <div id="content">
+        <header>
+          <h1><span>The atlas of Arabic <i>fii</i></br>أطلس حرف الجر في عبر اللهجات العربية </span></h1>
+          <nav>
+            <ul>
+              <li><a href="{{url_for('index')}}">Geographic Distribution</a></li>
+              <li><a href="{{url_for('similarity')}}">Similarity matrixes</a></li>
+              <li><a href="{{url_for('recherche')}}">Search the database</a></li>
+              <li><a href="{{url_for('language_clustering')}}">Language relatedness</a></li>
+              <li><a href="{{url_for('a_propos')}}">About this project</a></li>
+              <li><a href="{{url_for('bibliography')}}">Bibliography</a></li>
+            </ul>
+          </nav>
+        </header>
+
+        <h3>Language relatedness</h3>
+        <div class="language_clustering">
+          The dendrogram displayed on this page was created using the online hierarchical clustering tool by <a href="https://people.revoledu.com/kardi/tutorial/Clustering/Online-Hierarchical-Clustering.html">Revoledu</a>.  <br><br>
+          It employs a hierarchical agglomerative clustering algorithm applied to the similarity matrix, with clusters grouped using single linkage clustering. <br><br>
+          The matrix comprises 11 Arabic varieties and 11 dimensions corresponding to the usages of <i>fii</i> investigated in this study. The values associated with each dimension range from 0% to 100%, reflecting the judgments expressed by the native consultants. These values are the same as those represented in the maps and can be calculated from the database as described on the Geographic Distribution page. <br><br>
+          A noteworthy feature of the dendrogram is that the resulting structure does not solely reflect groupings based on the geographical distribution of the investigated varieties. This suggests that morphosyntactic change is driven by internal language factors that are independent of language contact. For contrasting results based exclusively on lexical data, see Salameh, Bouamor, & Habash (2018). <br><br>
+        </div>
+        <div class="container">
+          <div class="dendrogram">
+              <img src="{{ url_for('static', filename='dendrogram.png') }}" alt="dendrogram" >
+          </div>
+        </div>
+
+      </div>
+      <div id="footer">
+        <div id="credits">
+          Web development by : Valentin Pradervand<br>
+          A study by: Margherita Pallottino, PhD
+       </div>
+        <div id="logos">
+          <img id="logo_UNIGE" src="{{ url_for('static', filename='logo_UNIGE.jpg') }}" alt="logo UNIGE" width="126px" height="50px">
+          <img id="logo_OFAI" src="{{ url_for('static', filename='logo_OFAI.svg') }}" alt="logo OFAI" width="206px" height="50px">
+          <img id="logo_FNS" src="{{ url_for('static', filename='logo_FNS.png') }}" alt="logo FNS" width="200px" height="50px">
+        </div>
+      </div>
+    </div>
+  </body>
+  </html>

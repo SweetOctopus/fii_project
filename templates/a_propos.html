@@ -1,0 +1,79 @@
+<!DOCTYPE html">
+
+<html lang="fr">
+
+<head>
+    <meta charset="utf-8" />
+    <!--cette href c'est la nomenclature de jinja pour aller chercher la style sheet dans le dossier static,
+    je crois ^^-->
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}" />
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css"
+        integrity="sha256-kLaT2GOSpHechhsozzB+flnD+zUyjE2LlfWPgU04xyI=" crossorigin="" />
+
+
+  <title>Fii project</title>
+</head>
+
+<body>
+  <div id="wrapper">
+    <div id="content">
+      <header>
+        <h1><span>The atlas of Arabic <i>fii</i></br>أطلس حرف الجر في عبر اللهجات العربية </span></h1>
+        <nav>
+          <ul>
+            <li><a href="{{url_for('index')}}">Geographic Distribution</a></li>
+            <li><a href="{{url_for('similarity')}}">Similarity matrixes</a></li>
+            <li><a href="{{url_for('recherche')}}">Search the database</a></li>
+            <li><a href="{{url_for('language_clustering')}}">Language relatedness</a></li>
+            <li><a href="{{url_for('a_propos')}}">About this project</a></li>
+            <li><a href="{{url_for('bibliography')}}">Bibliography</a></li>
+          </ul>
+        </nav>
+      </header>
+
+      <h3>Introduction</h3>
+      <div class="a_propos">
+        Arabic is one of the languages with the largest number of speakers in the world, being the native tongue of more than 360 million speakers (Ethnologue, 2022). The Arabic speaking community is not homogeneous: it includes a myriad of varieties which present a degree of differentiation comparable to that of the Romance language family. These varieties are learned at home and used in informal contexts. The study of Arabic varieties is often referred as “Arabic Dialectology” and a large part of this research focuses on comparing morphophonological features across dialects, whereas the study behind the constitution of this atlas compares different Arabic dialects on the basis of their morphosyntactic structure. 
+
+      </div>
+      <h3>Goal</h3>
+      <div class="a_propos">
+        The aim of this atlas is to examine the distribution of the prepositional item <i>fii</i> ('in/at') and its allomorph b- across Arabic varieties to illustrate the geographical distribution of its functions and the relatedness of these varieties in terms of shared uses of the targeted preposition. The atlas currently allows for the comparison of the behavior of the functional elements <i>fii/bi</i> across eleven distinct varieties from eleven different countries, namely: Iraqi, Yemeni, Jordanian, Syrian, Egyptian, Sudanese, Libyan, Tunisian, Algerian, Maltese, and Moroccan.          The atlas currently allows to compare the behavior of the functional element fii/bi across twelve distinct varieties, from twelve distinct countries, namely: Iraqi, Saudi, Yemeni, Jordanian, Syrian, Egyptian, Sudanese, Libyan, Tunisian Algerian, Maltese and Moroccan. The datapoints represented in the maps are extracted from parallel datasets stored in a database which can be interrogated via the website (SEARCH). All datapoints were collected and annotated manually, and grammaticality judgments were gathered with the aid of native speakers living in the country or abroad (see ABOUT for additional details on the constitution of the database).<br><br>
+        The data are organized in parallel datasets stored in a database (the FIAA) that can be queried via the website (<a href="/recherche">"go to search the database" </a>). All data points were collected and annotated manually, and grammaticality judgments were gathered with the assistance of native speakers of the relevant varieties, whether living in the country or abroad. <br><br>
+      
+        Visit <a href="https://www.swissubase.ch">www.swissubase.ch</a> to download and learn more about this project:	 <br><br>
+
+        Link to the <a href="https://www.swissubase.ch/en/catalogue/studies/20868/20405/overview">project</a>.<br><br>
+        
+        Link to the <a href ="https://www.swissubase.ch/en/catalogue/studies/20868/20405/datasets/2674/3389/overview">FIAA database</a>.<br><br>
+      </div>
+
+      <h3>How to cite this database</h3>
+      <div class="a_propos">
+        Pallottino, M. (2024). FI Across Arabic (FIAA) (Version 1.0) [Data set]. LaRS - Language Repository of Switzerland. https://doi.org/10.48656/rne0-gh03 
+      </div>
+
+      <h3>The study and the website</h3>
+      <div class="a_propos">
+        The study for the creation of the atlas is funded by the Swiss National Science Foundation (grant number P500ph_211169/1). The dialectological study is carried out by Dr. Margherita Pallottino, FNS research fellow at OFAI (Vienna, AT), under the supervision of Dr. Peter Hallman. <br>
+        The website has been developped by Valentin Pradervand, in the context of the "Projet NTIC" course, under the supervision of Luka Nerima, Chargé d'enseignement, and Chunyang Jiang, Assistante, Candidate au doctorat.
+      </div>
+      
+    </div>
+    <div id="footer">
+      <div id="credits">
+        Web development by : Valentin Pradervand<br>
+        A study by: Margherita Pallottino, PhD
+    </div>
+    <div id="logos">
+        <img id="logo_UNIGE" src="{{ url_for('static', filename='logo_UNIGE.jpg') }}" alt="logo UNIGE" width="126px" height="50px">
+        <img id="logo_OFAI" src="{{ url_for('static', filename='logo_OFAI.svg') }}" alt="logo OFAI" width="206px" height="50px">
+        <img id="logo_FNS" src="{{ url_for('static', filename='logo_FNS.png') }}" alt="logo FNS" width="200px" height="50px">
+    </div>
+    </div>
+    </div>
+    
+  </div>
+</body>
+</html>
