@@ -31,18 +31,20 @@
           </nav>
         </header>
 
-        <h3>Language relatedness</h3>
-        <div class="language_clustering">
-          The dendrogram displayed on this page was created using the online hierarchical clustering tool by <a href="https://people.revoledu.com/kardi/tutorial/Clustering/Online-Hierarchical-Clustering.html">Revoledu</a>.  <br><br>
-          It employs a hierarchical agglomerative clustering algorithm applied to the similarity matrix, with clusters grouped using single linkage clustering. <br><br>
-          The matrix comprises 11 Arabic varieties and 11 dimensions corresponding to the usages of <i>fii</i> investigated in this study. The values associated with each dimension range from 0% to 100%, reflecting the judgments expressed by the native consultants. These values are the same as those represented in the maps and can be calculated from the database as described on the Geographic Distribution page. <br><br>
-          A noteworthy feature of the dendrogram is that the resulting structure does not solely reflect groupings based on the geographical distribution of the investigated varieties. This suggests that morphosyntactic change is driven by internal language factors that are independent of language contact. For contrasting results based exclusively on lexical data, see Salameh, Bouamor, & Habash (2018). <br><br>
-        </div>
-        <div class="container">
+        <div id="box_language_clustering">
+          <div class="language_clustering" id="language_clustering_text">
+            <h3 id ="h3_language_clustering">Language relatedness</h3>
+            The dendrogram displayed on this page was created using the online hierarchical clustering tool by <a href="https://people.revoledu.com/kardi/tutorial/Clustering/Online-Hierarchical-Clustering.html">Revoledu</a>.  <br><br>
+            It employs a hierarchical agglomerative clustering algorithm applied to the similarity matrix, with clusters grouped using single linkage clustering. <br><br>
+            The matrix comprises 11 Arabic varieties and 11 dimensions corresponding to the usages of <i>fii</i> investigated in this study. The values associated with each dimension range from 0% to 100%, reflecting the judgments expressed by the native consultants. These values are the same as those represented in the maps and can be calculated from the database as described on the Geographic Distribution page. <br><br>
+            A noteworthy feature of the dendrogram is that the resulting structure does not solely reflect groupings based on the geographical distribution of the investigated varieties. This suggests that morphosyntactic change is driven by internal language factors that are independent of language contact. For contrasting results based exclusively on lexical data, see Salameh, Bouamor, & Habash (2018). <br><br>
+          </div>
+
           <div class="dendrogram">
               <img src="{{ url_for('static', filename='dendrogram.png') }}" alt="dendrogram" >
           </div>
         </div>
+
 
       </div>
       <div id="footer">

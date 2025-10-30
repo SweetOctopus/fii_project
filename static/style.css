@@ -311,7 +311,7 @@ width: 20px;
 
   /* STYLISATION DE LA RECHERCHE EN COURS */
   width: 250px;
-  height: 630px;
+
   margin-bottom: 0;
 
 
@@ -459,7 +459,44 @@ thead th {
 }
 
 
+#h3_language_clustering{
+  padding-left: 0;
+}
 
+#box_language_clustering  {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 2rem; /* espace entre texte et image */
+  margin-top: 2rem;
+}
+
+#language_clustering_text{
+  flex: 3; /* 3 indique 60% ici (3 + 2 /5*/
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.dendrogram {
+  flex: 2;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.dendrogram img {
+  max-width: 100%;
+  height: auto;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+
+@media (  max-width: 1500px) {
+  html {
+    zoom: 85%;
+  }
+}
 
 
 
