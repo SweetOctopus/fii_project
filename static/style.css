@@ -183,6 +183,8 @@ img.icon7 {
 }
 #menu4{
   width: 300px;
+  height: 353px;
+  overflow-y: auto;
   border-radius: 10px;
   border-color: #04AA6D;
   border-width: 3px;
@@ -471,6 +473,8 @@ thead th {
   margin-top: 2rem;
 }
 
+
+
 #language_clustering_text{
   flex: 3; /* 3 indique 60% ici (3 + 2 /5*/
   font-size: 1rem;
@@ -495,6 +499,9 @@ thead th {
 @media (  max-width: 1500px) {
   html {
     zoom: 85%;
+  }
+  #box_language_clustering {
+    margin-top: 0.5rem;
   }
 }
 
